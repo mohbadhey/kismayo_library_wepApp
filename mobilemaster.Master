@@ -1,0 +1,160 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="mobilemaster.master.cs" Inherits="library.mobilemaster" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+ 
+    </asp:ContentPlaceHolder>
+
+     <script src="js/sweetalert2.min.js"></script>
+ <link href="css/sweetalert2.css" rel="stylesheet" />
+    
+                <link rel="stylesheet" href="style.css" />
+   
+       <script defer src="assets2/plugins/fontawesome/js/all.min.js"></script>
+ 
+    <!-- App CSS -->  
+    <link  rel="stylesheet" href="assets2/css/portal.css"/>
+    <script src="assets/jquery.min.js"></script>
+    <script src="ionicons-master/ionicons.esm.js" type="module"></script>
+    <script src="ionicons-master/ionicons.js"></script>
+    <link href="bootstrap-icons-1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+         <style>
+
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+main2 {
+    padding: 1rem;
+    width: 100%; /* Set the width to 100% */
+    height: 90vh; /* Set the height to 80% of the viewport height */
+    /* Adjust the height value as needed */
+    box-sizing: border-box; /* Ensure padding is included in the total height */
+}
+
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    height: 90vh; /* Set the height to 100% of the viewport height */
+}
+
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-3, .col-2, .col-7 {
+    flex: 1 1 auto;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .col-3, .col-2, .col-7 {
+        flex-basis: 100%;
+    }
+}
+
+ </style>
+</head>
+<body>
+    <main class="main2">
+        <div class="container">
+            <div class="row">
+                <div class="col-3">		 
+                    <div class="app-utility-item app-notifications-dropdown dropdown" onclick="dropdownMenuClicked()">    
+                        <a class="dropdown-toggle no-toggle-arrow" id="notifications-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" title="Notifications">
+                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                            <i class="bi bi-bell-fill" style="font-size: 26px;"></i>
+                            <span class="icon-badge"><asp:Label ID="Label3" runat="server" Text=""></asp:Label></span>
+                        </a><!--//dropdown-toggle-->
+                        
+                        <div class="dropdown-menu p-0" aria-labelledby="notifications-dropdown-toggle">
+                            <div class="dropdown-menu-header p-3">
+                                <h5 class="dropdown-menu-title mb-0">Notifications</h5>
+                            </div><!--//dropdown-menu-title-->
+
+                            <div class="dropdown-menu-content">
+                                <asp:ListView ID="transactionsListView" runat="server">
+                                    <ItemTemplate>
+                                        <div class="item p-3">
+                                            <div class="row gx-2 justify-content-between align-items-center">
+                                                <div class="col-auto">
+                                                    <img  class="profile-image" src="klogo-removebg-preview.png" />
+                                                </div><!--//col-->
+                                                <div class="col">
+                                                    <div class="info"> 
+                                                        <div class="desc">
+                                                            <%# TruncateDescription(Eval("description").ToString(), 50) %>
+                                                        </div>
+                                                        <div class="meta"><%# FormatDate(Eval("date")) %></div>
+                                                    </div>
+                                                </div><!--//col--> 
+                                            </div><!--//row-->
+                                            <a class="link-mask" href="#"></a>
+                                        </div><!--//item-->
+                                    </ItemTemplate>
+                                </asp:ListView>
+                            </div><!--//dropdown-menu-content-->
+                            
+                            <div class="dropdown-menu-footer p-2 text-center">
+                                <a href="notifications.html">View all</a>
+                            </div>							
+                        </div><!--//dropdown-menu-->					        
+                    </div>
+                </div>
+                <div class="col-2"></div>
+                <div class="col-7 d-flex"> <h5>hello,</h5>    <span id="fullName"><% = Session["full_name"] %></span></div>
+            </div>
+            <span id="stdid" style="display: none;"><% = Session["std_id"] %></span>
+            <asp:Label ID="Label1" runat="server" hidden="true" Text=""></asp:Label>
+            <form id="form1" runat="server">
+                <div>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+                </div>
+            </form>
+        </div>
+    </main>
+            
+
+                <script src="assets2/plugins/popper.min.js"></script>
+    <script src="assets2/plugins/bootstrap/js/bootstrap.min.js"></script>  
+
+
+
+    <script>
+        // Function to handle dropdown menu click
+        function dropdownMenuClicked() {
+            // Assuming you have jQuery available
+            $.ajax({
+                type: "POST",
+                url: "thestudent.aspx/UpdateIsUnread",
+                data: "{}", // You can pass data here if needed
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    // Handle success response if needed
+                    console.log("IsUnread updated successfully.");
+                },
+                error: function (xhr, status, error) {
+                    // Handle error if needed
+                    console.error("Error updating IsUnread:", error);
+                }
+            });
+        }
+    </script>
+
+   
+
+</body>
+</html>

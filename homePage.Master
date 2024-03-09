@@ -1,0 +1,388 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="homePage.master.cs" Inherits="library.homePage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+
+	 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+		
+<%--		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/style.css">--%>
+
+      <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+	<script type="text/javascript" src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/sweetalert2.min.js"></script>
+    <link href="css/sweetalert2.css" rel="stylesheet" />
+
+	    <script defer src="assets2/plugins/fontawesome/js/all.min.js"></script>
+    <link href="style2.css" rel="stylesheet" />
+    <!-- App CSS -->  
+    <link  rel="stylesheet" href="assets2/css/portal.css">
+
+	<asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    </head>
+   <body class="app">
+    <form id="form1" runat="server">
+
+
+      
+          <header class="app-header fixed-top">	   	            
+ <div class="app-header-inner">  
+	        <div class="container-fluid py-2">
+		        <div class="app-header-content"> 
+		            <div class="row justify-content-between align-items-center">
+			        
+				    <div class="col-auto">
+					    <a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
+						    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img"><title>Menu</title><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg>
+					    </a>
+				    </div><!--//col-->
+		            <div class="search-mobile-trigger col">
+			       
+								 <span id="date"></span>
+			
+			        </div><!--//col-->
+		        	
+		            
+		            <div class="app-utilities col-auto">
+			 
+			            <div class="app-utility-item text-start">
+							
+								
+							
+							  <span id="acy"></span>
+				      
+					    </div><!--//app-utility-item-->
+			            
+			            <div class="app-utility-item app-user-dropdown dropdown">
+				            <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"> welcome	<asp:Label runat="server" ID="lbl" ></asp:Label></a>
+				            <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
+								<li><a class="dropdown-item" href="adminaccount.aspx">Account</a></li>
+								
+						
+								<li><hr class="dropdown-divider"></li>
+						<li>
+			<asp:Button ID="button" class="btn btn-primary" runat="server" Text="Logout" OnClick="button_Click" />
+
+				</li>
+							</ul>
+			            </div><!--//app-user-dropdown--> 
+		            </div><!--//app-utilities-->
+		        </div><!--//row-->
+	            </div><!--//app-header-content-->
+	        </div><!--//container-fluid-->
+        </div><!--//app-header-inner-->
+        <div id="app-sidepanel" class="app-sidepanel"> 
+	        <div id="sidepanel-drop" class="sidepanel-drop"></div>
+	        <div class="sidepanel-inner d-flex flex-column">
+		        <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
+		        <div class="app-branding">
+		            <a class="app-logo" >
+						<img class="logo-icon me-2" src="klogo-removebg-preview.png" alt="logo">
+						<span class="logo-text">KU-LIB</span></a>
+	
+		        </div><!--//app-branding-->  
+		        
+			    <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
+				    <ul class="app-menu list-unstyled accordion" id="menu-accordion">
+					    <li class="nav-item">
+					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+					        <a class="nav-link  " href="Dhashboard.aspx">
+						        <span class="nav-icon">
+						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+		  <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5H9.5a.5.5 0 0 1-.5-.5v-4H7v4a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4h3.5V7.707L8 2.207l-5.5 5.5z"/>
+		  <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+		</svg>
+						         </span>
+		                       <span class="nav-link-text">Dashboard</span>
+
+					        </a><!--//nav-link-->
+					    </li>
+						
+						
+						<!--//nav-item-->
+					
+					
+						   <li class="nav-item has-submenu">
+					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+					        <a class="nav-link  submenu-toggle " href="#" data-bs-toggle="collapse" data-bs-target="#submenu-3" aria-expanded="false" aria-controls="submenu-3">
+						        <span class="nav-icon">
+						        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-files" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  <path fill-rule="evenodd" d="M4 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4z"/>
+	  <path d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z"/>
+	</svg>
+						         </span>
+		                         <span class="nav-link-text">BOOKS</span>
+		                         <span class="submenu-arrow">
+		                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+	</svg>
+	                             </span><!--//submenu-arrow-->
+					        </a><!--//nav-link-->
+					        <div id="submenu-3" class="collapse submenu submenu-3" data-bs-parent="#menu-accordion">
+						        <ul class="submenu-list list-unstyled">
+							        <li class="submenu-item"><a class="submenu-link" href="insertBks.aspx">Insert Book</a></li>
+									     <li class="submenu-item"><a class="submenu-link" href="updatebooks.aspx">Update Books</a></li>
+							        <li class="submenu-item"><a class="submenu-link" href="book_details.aspx">Book Reports</a></li>
+										 <li class="submenu-item"><a class="submenu-link" href="book_issue.aspx">Book Issue</a></li>
+				 <li class="submenu-item"><a class="submenu-link" href="book_issue_report.aspx">Book Issue report</a></li>
+				 <li class="submenu-item"><a class="submenu-link" href="book_return.aspx">Book Return</a></li>
+				<li class="submenu-item"><a class="submenu-link" href="return_report.aspx">Book Return Report</a></li>
+							      
+						        </ul>
+					        </div>
+					    </li>
+						
+						
+					    <li class="nav-item has-submenu">
+					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+					        <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-1" aria-expanded="false" aria-controls="submenu-1">
+						        <span class="nav-icon">
+						        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-files" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  <path fill-rule="evenodd" d="M4 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4z"/>
+	  <path d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z"/>
+	</svg>
+						         </span>
+		                         <span class="nav-link-text">Students</span>
+		                         <span class="submenu-arrow">
+		                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+	</svg>
+	                             </span><!--//submenu-arrow-->
+					        </a><!--//nav-link-->
+					        <div id="submenu-1" class="collapse submenu active submenu-1" data-bs-parent="#menu-accordion">
+						        <ul class="submenu-list list-unstyled">
+							        <li class="submenu-item"><a class="submenu-link" href="insertStudents.aspx">Insert Students</a></li>
+									     <li class="submenu-item"><a class="submenu-link" href="studentopera.aspx">Students Update</a></li>
+									    <li class="submenu-item"><a class="submenu-link" href="InsertVisit.aspx">Insert Visitation </a></li>
+									    <li class="submenu-item"><a class="submenu-link" href="visithistory.aspx"> Visitation History </a></li>
+							        <li class="submenu-item"><a class="submenu-link" href="student_details.aspx">Students Report</a></li>
+								
+							      
+						        </ul>
+					        </div>
+					    </li>
+						
+						
+						
+						<!--//nav-item-->
+					    <li class="nav-item has-submenu">
+					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+					        <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-2" aria-expanded="false" aria-controls="submenu-2">
+						        <span class="nav-icon">
+						        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-columns-gap" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  <path fill-rule="evenodd" d="M6 1H1v3h5V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm14 12h-5v3h5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5zM6 8H1v7h5V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H1zm14-6h-5v7h5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1h-5z"/>
+	</svg>
+						         </span>
+		                         <span class="nav-link-text">Visitors</span>
+		                         <span class="submenu-arrow">
+		                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+	</svg>
+	                             </span><!--//submenu-arrow-->
+					        </a><!--//nav-link-->
+					        <div id="submenu-2" class="collapse submenu submenu-2" data-bs-parent="#menu-accordion">
+						        <ul class="submenu-list list-unstyled">
+							        <li class="submenu-item"><a class="submenu-link" href="insertvisitors.aspx">Insert Visitors</a></li>
+     <li class="submenu-item"><a class="submenu-link" href="visitopera.aspx">Operate Visitors</a></li>
+									
+
+
+							        <li class="submenu-item"><a class="submenu-link" href="visiterbookissue.aspx">Book Issue </a></li>
+							        <li class="submenu-item"><a class="submenu-link" href="visitorissuereport.aspx">Book Issue Report</a></li>
+							        <li class="submenu-item"><a class="submenu-link" href="visitorreturn.aspx">Book Return</a></li>
+									
+							        <li class="submenu-item"><a class="submenu-link" href="visitorreturnreport.aspx">Book Return Report</a></li>
+							      
+						        </ul>
+					        </div>
+					    </li><!--//nav-item-->
+
+					   
+					 			<!--//nav-item-->
+					    <li class="nav-item has-submenu">
+					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+					        <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-4" aria-expanded="false" aria-controls="submenu-4">
+						        <span class="nav-icon">
+						        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-columns-gap" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  <path fill-rule="evenodd" d="M6 1H1v3h5V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm14 12h-5v3h5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5zM6 8H1v7h5V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H1zm14-6h-5v7h5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1h-5z"/>
+	</svg>
+						         </span>
+		                         <span class="nav-link-text">Operations</span>
+		                         <span class="submenu-arrow">
+		                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+	</svg>
+	                             </span><!--//submenu-arrow-->
+					        </a><!--//nav-link-->
+					        <div id="submenu-4" class="collapse submenu submenu-2" data-bs-parent="#menu-accordion">
+						        <ul class="submenu-list list-unstyled">
+							        <li class="submenu-item"><a class="submenu-link" href="updatesemesters.aspx">Operation Semesters</a></li>
+									  <li class="submenu-item"><a class="submenu-link" href="message.aspx">Message</a></li>
+									 <li class="submenu-item"><a class="submenu-link" href="deletevisitation.aspx">delete visiotrs </a></li>
+										
+							 
+									
+						
+							      
+						        </ul>
+					        </div>
+					    </li><!--//nav-item-->
+
+					   
+					    
+										    
+				    </ul><!--//app-menu-->
+
+
+
+
+
+
+
+				
+
+
+
+
+
+
+			    </nav><!--//app-nav-->
+		     
+	        </div><!--//sidepanel-inner-->
+	    </div><!--//app-sidepanel-->
+    </header><!--//app-header-->
+    
+    <div class="app-wrapper">
+	    
+ 
+		 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+      
+    </div><!--//app-wrapper-->    					
+
+ 
+
+          
+     
+    </form>
+
+	    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+
+        <script src="assets2/plugins/popper.min.js"></script>
+    <script src="assets2/plugins/bootstrap/js/bootstrap.min.js"></script>  
+
+    <!-- Charts JS -->
+    <script src="assets2/plugins/chart.js/chart.min.js"></script> 
+    <script src="assets2/js/index-charts.js"></script> 
+    
+    <!-- Page Specific JS -->
+    <script src="assets2/js/app.js"></script> 
+	
+
+	      <script>
+
+              // Get all elements with class 'myLink'
+              var links = document.querySelectorAll('.nav-link');
+
+              // Loop through each link and add a click event listener
+              links.forEach(function (link) {
+                  link.addEventListener('click', function (event) {
+                      // Prevent the default action of the link
+                  
+
+                      // Remove 'active' class from all links
+                      links.forEach(function (link) {
+                          link.classList.remove('active');
+                      });
+
+                      // Add 'active' class to the clicked link
+                      this.classList.add('active');
+                  });
+              });
+
+
+              var currentDate = new Date();
+
+              // Extract date components
+              var year = currentDate.getFullYear();
+              var month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+              var day = ('0' + currentDate.getDate()).slice(-2);
+
+              // Extract time components
+              var hours = ('0' + (currentDate.getHours() % 12 || 12)).slice(-2); // Convert to 12-hour format
+              var minutes = ('0' + currentDate.getMinutes()).slice(-2);
+              var seconds = ('0' + currentDate.getSeconds()).slice(-2);
+              var milliseconds = ('00' + currentDate.getMilliseconds()).slice(-3);
+
+              // Determine AM/PM
+              var meridiem = (currentDate.getHours() >= 12) ? 'PM' : 'AM';
+
+              // Construct the formatted date and time string
+              var formattedDateTime = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds + '.' + milliseconds + ' ' + meridiem;
+
+              document.getElementById("date").innerHTML = formattedDateTime;
+
+
+ datee()
+function datee()
+{
+
+
+    $.ajax({
+        url: 'insertBks.aspx/DataBind28',
+        dataType: "json",
+        type: 'POST',
+        contentType: "application/json",
+        success: function (response) {
+            console.log(response);
+
+            // Assuming your response structure
+            var bookDetails = response.d[0]; // Accessing the first (and only) object in the array
+
+
+            $("#acy").text(bookDetails.AcademicYear);
+         
+
+     
+        },
+        error: function (response) {
+            console.error("Error:", response);
+            // Handle errors more gracefully, e.g., display an error message to the user
+        }
+    });
+}
+
+
+
+
+
+          </script>
+
+
+</body>
+
+</html>

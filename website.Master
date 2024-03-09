@@ -1,0 +1,322 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="website.master.cs" Inherits="library.website" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+     <script src="js/sweetalert2.min.js"></script>
+ <link href="css/sweetalert2.css" rel="stylesheet" />
+    
+                <link rel="stylesheet" href="style.css" />
+   
+       <script defer src="assets2/plugins/fontawesome/js/all.min.js"></script>
+ 
+    <!-- App CSS -->  
+    <link  rel="stylesheet" href="assets2/css/portal.css"/>
+    <script src="assets/jquery.min.js"></script>
+    <script src="ionicons-master/ionicons.esm.js" type="module"></script>
+    <script src="ionicons-master/ionicons.js"></script>
+    <link href="bootstrap-icons-1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+
+         <style>
+
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+
+main {
+    padding: 1rem;
+}
+  .bottom-bar {
+      background-color: #e7edf9;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      border-radius: 20px 20px 0 0;
+  }
+
+  .icon {
+      font-size: 1.5em;
+      padding: .5em;
+      margin: .5em;
+      margin-top: 0;
+      transition: .5s ease-in-out;
+      border-radius: 100%;
+      border: 7px solid #eee;
+  }
+
+  .active {
+      transform: scale(1.25) translateY(-1em);
+      background: linear-gradient(135deg, rgb(17, 16, 40), #250c1a);
+      border: 7px solid #9a9ac3;
+      color: white;
+  }
+
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.col-3, .col-2, .col-7 {
+    flex: 1 1 auto;
+    margin-bottom: 1rem;
+}
+
+
+@media (max-width: 768px) {
+    .col-3, .col-2, .col-7 {
+        flex-basis: 100%;
+    }
+}
+
+
+ </style>
+ 
+
+</head>
+<body>
+            <main>
+                <div class="row">
+                    <div class="col-3">		 <div class="app-utility-item app-notifications-dropdown dropdown" onclick="dropdownMenuClicked()">    
+				            <a class="dropdown-toggle no-toggle-arrow" id="notifications-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" title="Notifications">
+					            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+<i class="bi bi-bell-fill" style="font-size: 26px;"></i>
+
+					            <span class="icon-badge"><asp:Label ID="Label3" runat="server" Text=""></asp:Label></span>
+					        </a><!--//dropdown-toggle-->
+					        
+					        <div class="dropdown-menu p-0" aria-labelledby="notifications-dropdown-toggle">
+					            <div class="dropdown-menu-header p-3">
+						            <h5 class="dropdown-menu-title mb-0">Notifications</h5>
+						        </div><!--//dropdown-menu-title-->
+
+						        <div class="dropdown-menu-content">
+                                      <asp:ListView ID="transactionsListView" runat="server" >
+                <ItemTemplate>
+							       <div class="item p-3">
+								        <div class="row gx-2 justify-content-between align-items-center">
+									        <div class="col-auto">
+										   
+                                                <img  class="profile-image" src="klogo-removebg-preview.png" />
+									        </div><!--//col-->
+									        <div class="col">
+										        <div class="info"> 
+											  <div class="desc">
+    <%# TruncateDescription(Eval("description").ToString(), 50) %>
+</div>
+
+											        <div class="meta"><%# FormatDate(Eval("date")) %></div>
+										        </div>
+									        </div><!--//col--> 
+								        </div><!--//row-->
+								        <a class="link-mask" href="#"></a>
+							       </div><!--//item-->
+							           </ItemTemplate>
+            </asp:ListView>
+						        </div><!--//dropdown-menu-content-->
+						        
+						        <div class="dropdown-menu-footer p-2 text-center">
+							        <a href="notifications.html">View all</a>
+						        </div>
+															
+							</div><!--//dropdown-menu-->					        
+				       
+      </div>
+  </div>
+                    <div class="col-6"></div>
+                         <div class="col-3 d-flex"> <h5>hello,</h5>    <span id="fullName"><% = Session["full_name"] %></span></div>
+                </div>
+                 
+               
+      <span id="stdid" style="display: none;"><% = Session["std_id"] %></span>
+  	<asp:Label ID="Label1" runat="server" hidden="true" Text=""></asp:Label>
+              
+    <form id="form1" runat="server">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+
+
+            </asp:ContentPlaceHolder>
+              </div>
+    </form>
+</main>
+
+  
+            <div class="bottom-bar">
+    <ion-icon name="home-outline" class="icon " onclick="change(event, this)">
+</ion-icon>
+<ion-icon name="folder-outline" class="icon" onclick="change(event, this)">
+</ion-icon>
+                <ion-icon name="timer-outline" class="icon" onclick="change(event, this)"></ion-icon>
+
+<ion-icon name="person-circle-outline" class="icon" onclick="change(event, this)">
+</ion-icon>
+<%--<ion-icon name="person-outline" class="icon" onclick="change(event, this)">
+</ion-icon>--%>
+
+
+    </div>
+<script>
+
+    
+    ////function change(event, item) {
+    ////    event.preventDefault(); // Prevent default action of the click event
+
+    ////    const buttons = document.querySelectorAll('.icon');
+    ////    buttons.forEach(function (obj) {
+    ////        obj.classList.remove("active");
+    ////    });
+    ////    item.classList.add("active");
+
+    ////    // Get the name of the clicked icon
+    ////    const iconName = item.getAttribute('name');
+
+    ////    // Perform page navigation based on the clicked icon
+    ////    switch (iconName) {
+    ////        case 'home-outline':
+    ////            window.location.href = 'thestudent.aspx'; // Redirect to welcome.aspx
+    ////            break;
+    ////        case 'folder-outline':
+    ////            window.location.href = 'welcome.aspx'; // Redirect to thestudent.aspx
+    ////            break;
+    ////        case 'add-circle-outline':
+    ////            window.location.href = 'welcome.aspx'; // Redirect to add.aspx
+    ////            break;
+    ////        case 'person-outline':
+    ////            window.location.href = 'person.aspx'; // Redirect to person.aspx
+    ////            break;
+    ////        case 'image-outline':
+    ////            window.location.href = 'image.aspx'; // Redirect to image.aspx
+    ////            break;
+    ////        default:
+    ////            // Handle default case if needed
+    ////            break;
+    ////    }
+    ////}
+
+    function change(event, item) {
+        event.preventDefault(); // Prevent default action of the click event
+
+        const buttons = document.querySelectorAll('.icon');
+        buttons.forEach(function (obj) {
+            obj.classList.remove("active");
+        });
+        item.classList.add("active");
+
+        // Get the name of the clicked icon
+        const iconName = item.getAttribute('name');
+
+        // Perform page navigation based on the clicked icon
+        switch (iconName) {
+            case 'home-outline':
+                window.location.href = 'welcome2.aspx'; // Redirect to welcome.aspx
+                break;
+            case 'folder-outline':
+                window.location.href = 'thestudent2.aspx'; // Redirect to thestudent.aspx
+                break;
+            case 'person-circle-outline':
+                window.location.href = 'userdetails2.aspx'; // Redirect to add.aspx
+                break;
+            case 'person-outline':
+                window.location.href = 'person.aspx'; // Redirect to person.aspx
+                break;
+            case 'timer-outline':
+                window.location.href = 'stdvisithistory.aspx'; // Redirect to image.aspx
+                break;
+            default:
+                // Handle default case if needed
+                break;
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const currentPage = window.location.pathname; // Get the current page pathname
+
+        const icons = document.querySelectorAll('.icon');
+        icons.forEach(function (icon) {
+            const iconName = icon.getAttribute('name');
+            const iconPage = getIconPage(iconName); // Get the page associated with the icon
+
+            if (currentPage.includes(iconPage)) {
+                icon.classList.add('active'); // Set the icon as active if it corresponds to the current page
+            }
+        });
+    });
+
+    function getIconPage(iconName) {
+        switch (iconName) {
+            case 'home-outline':
+                return 'welcome2.aspx';
+            case 'folder-outline':
+                return 'thestudent2.aspx';
+            case 'person-circle-outline':
+                return 'userdetails2.aspx';
+            case 'person-outline':
+                return 'userdetails.aspx';
+            case 'timer-outline':
+                return 'stdvisithistory.aspx';
+            default:
+                return '';
+        }
+    }
+
+
+
+</script>
+                <script src="assets2/plugins/popper.min.js"></script>
+    <script src="assets2/plugins/bootstrap/js/bootstrap.min.js"></script>  
+
+    <!-- Charts JS -->
+    
+    <!-- Page Specific JS -->
+    <script src="assets2/js/app.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="script.js"></script>
+
+    <script>
+        // Function to handle dropdown menu click
+        function dropdownMenuClicked() {
+            // Assuming you have jQuery available
+            $.ajax({
+                type: "POST",
+                url: "thestudent2.aspx/UpdateIsUnread",
+                data: "{}", // You can pass data here if needed
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    // Handle success response if needed
+                    console.log("IsUnread updated successfully.");
+                },
+                error: function (xhr, status, error) {
+                    // Handle error if needed
+                    console.error("Error updating IsUnread:", error);
+                }
+            });
+        }
+    </script>
+
+       <script src="assets2/plugins/chart.js/chart.min.js"></script> 
+    <script src="assets2/js/index-charts.js"></script> 
+   
+
+</body>
+</html>
